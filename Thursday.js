@@ -24,10 +24,6 @@ class Thursday {
         }
     }
 
-    eat () {
-
-    }
-
     moveBackwards () {
         switch (this.direction) {
             case DIRECTION_RIGHT:

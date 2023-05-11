@@ -3,14 +3,26 @@
 <head>
   <title>Thursday Game</title>
   <style>
+    #canvasContainer{
+      width: 150px;
+      height: 150px;
+      background-image: url('../assests/Classroom.jpg');
+
+    }
     canvas {
       border: 5px solid; color: antiquewhite;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   </style>
 </head>
 <body>
-  <button id="startButton" style="position:absolute; top: 250px; left:250px; color: darkgreen; background-color: gold; border-color: darkgreen; border-radius: 10px; border-width: 10px;">RUN!</button>
-  <canvas id="myCanvas" width="500" height="500"></canvas>
+  <div>
+  <button id="startButton" style="position:absolute; top: 250px; left:250px; color: darkgreen; background-color: gold; border-color: darkgreen; border-radius: 10px; border-width: 10px;">RUN!</button> </div>
+  <div id="canvasContainer">
+  <canvas id="myCanvas" width="500" height="500" img src="../assests/Classroom.jpg" alt="Classroom"></canvas>
+  </div>
   <script src="Start.js"></script>
 </body>
 </html>

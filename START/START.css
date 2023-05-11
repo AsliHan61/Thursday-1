@@ -1,3 +1,11 @@
 canvas {
  border: 1px solid black;
 }
+
+.left-bar {
+  background: #00D1AE;
+  float: left;
+  height: 390px;
+  padding-top: 10px;
+  width: 20%;
+}
