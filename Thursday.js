@@ -10,6 +10,7 @@ class Thursday {
         this.nextDirection = this.direction;
         this.currentFrame = 1;
         this.frameCount = 7;
+        
 
         setInterval(() => {
             this.changeAnimation ();
@@ -25,7 +26,6 @@ class Thursday {
     }
 
     eat () {
-
     }
 
     moveBackwards () {
@@ -136,6 +136,24 @@ class Thursday {
         return parseInt ((this.y + 0.9999 * oneBlockSize) / oneBlockSize);
     }
 
+}
+
+class Timer {
+    constructor (){
+        this.currentTime = 0;
+        this.intervalId = null;
+      }
+      start(printTimeCallback) {
+        this.intervalId = setInterval( () => {
+          this.currentTime++;
+          if (printTimeCallback) printTimeCallback();
+        }, 1000);
+    }
+    getMinutes() {
+        let currentTimeMin = Math.floor(this.currentTime / 60);
+        console.log(currentTimeMin)
+        return currentTimeMin;
+      }
 }
 window.addEventListener("keydown", (event) => {
     let k = event.keyCode
