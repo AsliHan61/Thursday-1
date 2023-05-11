@@ -1,155 +1,41 @@
-const canvas = document.getElementById('canvas');
-const canvasContext = canvas.getContext('2d');
-const thursdayFrames = document.getElementById('Thursday');
+
+const startCanvas = document.getElementById('startScreen');
+const ctx= startCanvas.getContext('2d');
 
 
+const image1 = new Image();
+image1.src = './assests/Classroom.jpg';
+image1.onload = function() {
 
-let createRect = (x, y, width, height, color) => {
-    canvasContext.fillStyle = color; 
-    canvasContext.fillRect(x, y, width, height);
-    
-    // canvasContext.beginPath ();
-    // canvasContext.arc(250, 250 , 20, 0.25 * Math.PI, 1.75 * Math.PI);
-    // canvasContext.lineTo(
-    //     thursdayX = 250, 
-    //     thursdayY = 250);
-    // canvasContext.fillStyle = 'Yellow';
-    // canvasContext.fill();
-};
-let fps = 30;
-let oneBlockSize = 20;
-let wallColor = "gold";
-let wallSpaceWidth = oneBlockSize / 1.5;
-let WallOffset = (oneBlockSize - wallSpaceWidth) / 2;
-let WallInnerColor = "green";
+    ctx.drawImage(image1, 0, 0, startCanvas.width / 2, startCanvas.height);
 
-const DIRECTION_RIGHT = 4;
-const DIRECTION_UP = 3;
-const DIRECTION_LEFT =2;
-const DIRECTION_BOTTOM =1;
-let timer = new Timer (
-    function printTime () {
-        printMinutes ();
-    }
-);
+  const image2 = new Image();
+  image2.src = './assests/thursday1.jpg';
+  image2.onload = function() {
+    ctx.drawImage(image2, startCanvas.width / 2, 0, startCanvas.width / 2, startCanvas.height);
 
-let map = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-    [1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-    [1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1],
-    [1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1],
-    [1, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1],
-    [1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-    [1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-];
+    ctx.beginPath();
+    ctx.moveTo(120, 220);
+    ctx.arcTo(180, 220, 180, 190, 20);
+    ctx.arcTo(180, 160, 150, 160, 20);
+    ctx.arcTo(120, 160, 120, 190, 20);
+    ctx.arcTo(120, 220, 150, 220, 20);
+    ctx.closePath();
+    ctx.fillStyle = 'white';
+    ctx.fill();
 
-let gameLoop = () => {
-    update ()
-    draw ()
+    ctx.font = '14px Lobster';
+    ctx.fillStyle = 'darkgreen';
+    ctx.fillText('Hi! My name is Thursday. Help me to get to my class on time.', 152, 192);
+  };
 };
 
-let update = () => {
-    // todo
-    thursday.moveProcess ();
-};
+const startButton= document.getElementById('startButton');
 
-let draw = () => {
-    createRect(0,0, canvas.width, canvas.height, "darkgreen"); // => will turn the background black
-    // todo
-    drawWalls();
-    thursday.draw ();
-    drawTimer();
-};
+startButton.addEventListener('click', function(){
+console.log('Start button clicked!');
+document.getElementById("startScreen").style.display = "none";
+document.getElementById("startButton").style.display = "none";
 
-let gameInterval = setInterval(gameLoop, 1000 / fps);
-
-
-let drawWalls = () => {
-    for (let i = 0 ; i < map.length; i++) {
-        for (let j = 0 ; j < map[0].length; j++) {
-            if (map[i][j] == 1) { // then it is a wall
-                createRect (
-                    j * oneBlockSize, 
-                    i * oneBlockSize, 
-                    oneBlockSize, 
-                    oneBlockSize, 
-                    wallColor
-                    ); // => Draw the map on the canvas
-                    if (j > 0 && map [i][j - 1] == 1) {
-                        createRect (
-                            j * oneBlockSize, 
-                            i * oneBlockSize + WallOffset,
-                            wallSpaceWidth + WallOffset,
-                            wallSpaceWidth, 
-                            WallInnerColor,
-                            ); 
-                    }
-                    if( j < map[0].length - 1 && map[i][j + 1] == 1) {
-                        createRect(
-                            j * oneBlockSize + WallOffset,
-                            i * oneBlockSize + WallOffset,
-                            wallSpaceWidth + WallOffset,
-                            wallSpaceWidth,
-                            WallInnerColor,
-                        );
-                    }
-                    if (i > 0 && map [i -1][j] == 1) {
-                        createRect (
-                            j * oneBlockSize + WallOffset, 
-                            i * oneBlockSize,
-                            wallSpaceWidth,
-                            wallSpaceWidth + WallOffset, 
-                            WallInnerColor
-                        ); 
-                    }
-                    if( i < map.length - 1 && map[i + 1][j] == 1) {
-                        createRect(
-                            j * oneBlockSize + WallOffset,
-                            i * oneBlockSize + WallOffset,
-                            wallSpaceWidth,
-                            wallSpaceWidth + WallOffset,
-                            WallInnerColor,
-                        );
-                    }
-            }
-        }
-    }
-};
-
-let drawTimer = () => {
-    canvasContext.font = "20px Emulogic";
-    canvasContext.fillStyle = "white";
-    canvasContext.fillText(
-        "Timer: " + timer,
-        0,
-        oneBlockSize * (map.length +1) +2
-    );
-};
-
-let createNewThursday = () => {
-    thursday = new Thursday (
-        oneBlockSize,
-        oneBlockSize,
-        oneBlockSize,
-        oneBlockSize,
-        oneBlockSize / 5
-    );
-};
-createNewThursday ();
-gameLoop (); 
+document.getElementById("gameScreen").style.display = "block";
+});

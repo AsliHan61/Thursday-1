@@ -3,22 +3,25 @@
 <head>
     <title>Game Over</title>
     <style>
+        canvas {
+      border: 1px solid black;
+    }
         #game-container {
             position: relative;
         }
 
         #game-over-screen {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(5%, 5%);
+            top: 25%;
+            left: 5%;
+            transform: translate(50%, 50%);
             text-align: center;
         }
     </style>
 </head>
 <body>
     <div id="game-container">
-        <canvas id="game-canvas" width="800" height="600"></canvas>
+        <canvas id="game-canvas" width="500" height="500"></canvas>
         <div id="game-over-screen">
             <h1>Game Over!</h1>
             <button id="restart-button">Restart</button>

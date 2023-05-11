@@ -25,12 +25,6 @@ class Thursday {
         }
     }
 
-<<<<<<< HEAD
-=======
-    eat () {
-    }
-
->>>>>>> fb606c1ea4b212208bb0a8d07cb176f13f85feef
     moveBackwards () {
         switch (this.direction) {
             case DIRECTION_RIGHT:

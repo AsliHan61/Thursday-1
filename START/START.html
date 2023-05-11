@@ -1,63 +1,24 @@
 
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Thursday Game</title>
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
-
-    #startButton {
-        position: absolute;
-        top: 250px;
-        left: 10px;
-        transform: translateX(300%);
-    }
-  </style>
+    <html en="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv = "X-UA-compatible" contents="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale =1.0">
+        <title>Thursday</title>
+        <link href="./START.css">
 </head>
 <body>
-  <canvas id="myCanvas" width="500" height="300"></canvas>
+  <canvas id="startScreen" width="500" height="300"></canvas>
   <button id="startButton">Hurry up!</button>
-
-  <script>
-    const canvas = document.getElementById('myCanvas');
-    const ctx = canvas.getContext('2d');
-
-    const image1 = new Image();
-    image1.src = '../assests/Classroom.jpg';
-    image1.onload = function() {
-
-        ctx.drawImage(image1, 0, 0, canvas.width / 2, canvas.height);
-
-      const image2 = new Image();
-      image2.src = '../assests/thursday1.jpg';
-      image2.onload = function() {
-        ctx.drawImage(image2, canvas.width / 2, 0, canvas.width / 2, canvas.height);
-
-        ctx.beginPath();
-        ctx.moveTo(120, 220);
-        ctx.arcTo(180, 220, 180, 190, 20);
-        ctx.arcTo(180, 160, 150, 160, 20);
-        ctx.arcTo(120, 160, 120, 190, 20);
-        ctx.arcTo(120, 220, 150, 220, 20);
-        ctx.closePath();
-        ctx.fillStyle = 'white';
-        ctx.fill();
-
-        ctx.font = '14px Lobster';
-        ctx.fillStyle = 'darkgreen';
-        ctx.fillText('Hi! My name is Thursday. Help me to get to my class on time.', 152, 192);
-      };
-    };
-
-const startButton= document.getElementById('startButton');
-
-startButton.addEventListener('click', function(){
-    console.log('Start button clicked!');
-});
-
-  </script>
+    <canvas id="gameScreen" width="500" height="500"></canvas>
+    <div style="display: none">
+        <img id="Thursday" src="assests/Thursday.jpg" alt=""/>
+        <!-- <img id="ghosts" src="assests/ghost.png" alt="" /> -->
+    </div>
+    <script src="Thursday.js"></script>
+    <script src="game.js"></script>
+    
 </body>
 </html>
 
