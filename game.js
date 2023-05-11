@@ -27,6 +27,11 @@ const DIRECTION_RIGHT = 4;
 const DIRECTION_UP = 3;
 const DIRECTION_LEFT =2;
 const DIRECTION_BOTTOM =1;
+let timer = new Timer (
+    function printTime () {
+        printMinutes ();
+    }
+);
 
 let map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -61,7 +66,7 @@ let gameLoop = () => {
 
 let update = () => {
     // todo
-    thursday.moveProcess ()
+    thursday.moveProcess ();
 };
 
 let draw = () => {
@@ -69,6 +74,7 @@ let draw = () => {
     // todo
     drawWalls();
     thursday.draw ();
+    drawTimer();
 };
 
 let gameInterval = setInterval(gameLoop, 1000 / fps);
@@ -126,6 +132,16 @@ let drawWalls = () => {
     }
 };
 
+let drawTimer = () => {
+    canvasContext.font = "20px Emulogic";
+    canvasContext.fillStyle = "white";
+    canvasContext.fillText(
+        "Timer: " + timer,
+        0,
+        oneBlockSize * (map.length +1) +2
+    );
+};
+
 let createNewThursday = () => {
     thursday = new Thursday (
         oneBlockSize,
@@ -137,5 +153,3 @@ let createNewThursday = () => {
 };
 createNewThursday ();
 gameLoop (); 
-
-//min 20:48
