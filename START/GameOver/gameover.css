@@ -1,0 +1,14 @@
+.border {
+    width: 1px solid black;
+}
+.game-container {
+        position: relative;
+    }
+
+.game-over-screen {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(5%, 5%);
+        text-align: center;
+    }

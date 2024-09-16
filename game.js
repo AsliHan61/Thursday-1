@@ -1,114 +1,41 @@
-const canvas = document.getElementById('canvas');
-const canvasContext = canvas.getContext('2d');
-const pacmanFrames = document.getElementById('animation');
-const ghostFrames = document.getElementById('ghosts');
 
-let createRect = (x, y, width, height, color) => {
-    canvasContext.fillStyle = color; 
-    canvasContext.fillRect(x, y, width, height);
-};
-let fps = 30;
-let oneBlockSize = 20;
-let wallColor = "gold";
-let wallSpaceWidth = oneBlockSize / 1.5;
-let WallOffset = (oneBlockSize - wallSpaceWidth) / 2;
-let WallInnerColor = "darkgreen";
+const startCanvas = document.getElementById('startScreen');
+const ctx= startCanvas.getContext('2d');
 
 
-let map = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-    [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-    [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-    [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1],
-    [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2],
-    [1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-    [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-    [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
-    [1, 1, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 1],
-    [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-];
+const image1 = new Image();
+image1.src = './assests/Classroom.jpg';
+image1.onload = function() {
 
-let gameLoop = () => {
-    update ()
-    draw ()
+    ctx.drawImage(image1, 0, 0, startCanvas.width / 2, startCanvas.height);
+
+  const image2 = new Image();
+  image2.src = './assests/thursday1.jpg';
+  image2.onload = function() {
+    ctx.drawImage(image2, startCanvas.width / 2, 0, startCanvas.width / 2, startCanvas.height);
+
+    ctx.beginPath();
+    ctx.moveTo(120, 220);
+    ctx.arcTo(180, 220, 180, 190, 20);
+    ctx.arcTo(180, 160, 150, 160, 20);
+    ctx.arcTo(120, 160, 120, 190, 20);
+    ctx.arcTo(120, 220, 150, 220, 20);
+    ctx.closePath();
+    ctx.fillStyle = 'white';
+    ctx.fill();
+
+    ctx.font = '14px Lobster';
+    ctx.fillStyle = 'darkgreen';
+    ctx.fillText('Hi! My name is Thursday. Help me to get to my class on time.', 152, 192);
+  };
 };
 
-let update = () => {
-    // todo
-};
+const startButton= document.getElementById('startButton');
 
-let draw = () => {
-    createRect(0,0, canvas.width, canvas.height, "darkgreen"); // => will turn the background black
-    // todo
-    drawWalls()
-}
+startButton.addEventListener('click', function(){
+console.log('Start button clicked!');
+document.getElementById("startScreen").style.display = "none";
+document.getElementById("startButton").style.display = "none";
 
-let gameInterval = setInterval(gameLoop, 1000 / fps);
-
-
-let drawWalls = () => {
-    for (let i = 0 ; i < map.length; i++) {
-        for (let j = 0 ; j < map[0].length; j++) {
-            if (map[i][j] == 1) { // then it is a wall
-                createRect (
-                    j * oneBlockSize, 
-                    i * oneBlockSize, 
-                    oneBlockSize, 
-                    oneBlockSize, 
-                    wallColor
-                    ); // => Draw the map on the canvas
-                    if (j > 0 && map [i][j - 1] == 1) {
-                        createRect (
-                            j * oneBlockSize, 
-                            i * oneBlockSize + WallOffset,
-                            wallSpaceWidth + WallOffset,
-                            wallSpaceWidth, 
-                            WallInnerColor,
-                            ); 
-                    }
-                    if( j < map[0].length - 1 && map[i][j + 1] == 1) {
-                        createRect(
-                            j * oneBlockSize + WallOffset,
-                            i * oneBlockSize + WallOffset,
-                            wallSpaceWidth + WallOffset,
-                            wallSpaceWidth,
-                            WallInnerColor,
-                        );
-                    }
-                    if (i > 0 && map [i -1][j] == 1) {
-                        createRect (
-                            j * oneBlockSize + WallOffset, 
-                            i * oneBlockSize,
-                            wallSpaceWidth,
-                            wallSpaceWidth + WallOffset, 
-                            WallInnerColor
-                        ); 
-                    }
-                    if( i < map.length - 1 && map[i + 1][j] == 1) {
-                        createRect(
-                            j * oneBlockSize + WallOffset,
-                            i * oneBlockSize + WallOffset,
-                            wallSpaceWidth,
-                            wallSpaceWidth + WallOffset,
-                            WallInnerColor,
-                        );
-                    }
-            }
-        }
-    }
-};
-
-//min 20:48
+document.getElementById("gameScreen").style.display = "block";
+});

@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/kalahmad/OneDrive/Documents/IronHack/Project%20-%20Pacman/index.html",
+            "url": "file:///C:/Users/kalahmad/OneDrive/Documents/IronHack/Project%20-%20Thursday/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
